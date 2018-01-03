@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+.crayolaimg {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 3px;
+}
+.hangman-head {
+    background-color: #fed407;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    }
+
+.bannerright {
+    text-align: right;
+}
+
+.border {
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-color: #cccccc;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.introText {
+    font-size: 20px;
+    color: #0f6432;
+    font-family: 'Cabin Sketch', cursive;
+}
+
+#colorBox {
+    height: 200px;
+    width: 200px;
+    background-color: #111111;
+}
+
+#gameText {
+    font-size: 28px;
+    color: #0f6432;
+    text-align: center;
+    font-family: 'Cabin Sketch', cursive;
+    padding-top: 125px;
+}
+
+.generalText {
+    color: #0f6432;
+    text-align: center;
+    font-family: 'Cabin Sketch', cursive;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 28px;
+}

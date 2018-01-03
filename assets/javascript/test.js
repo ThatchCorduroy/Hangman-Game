@@ -1,43 +1,35 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
 
-    var wincount = 0;
-    var gamecount = 0;
 
-    function GamePlay() {
+    var gamePlay = {
 
-        this.answer = "";
-        this.answerArr = [];
-        this.dashArr = [];
-        this.hex = "";
+        answer : "",
+        answerArr : [],
+        dashArr : [],
+        hex : "",
 
-        this.guess = "";
-        this.badGuessCount = 0;
-        this.badGuessArr = [];
-        this.goodGuess = false;
-        this.badGuessAllowed = 5;
-        this.guessList = [];
-        this.duplicateGuess = false;
+        guess: "",
+        badGuessCount: 0,
+        badGuessArr: [],
+        goodGuess: false,
+        badGuessAllowed: 5,
 
-        this.first = true;
-        this.winner = false;
-        this.loser = false;
-       
-        this.gameText = "";
+        first: true,
+        winner: false,
+        loser: false,
+        
+        gameText: "",
 
-        this.init = function () {
+        init : function () {
             this.setAnswer();
             this.setHex();
             this.setAnswerArr();
             this.setDashArr();
             this.gameText = this.prettyText(this.dashArr);
             this.setText();
-        };
+        },
 
-        this.getResult = function () {
-            return this.winner;
-        }
-
-        this.prettyText = function(arr) {
+        prettyText : function(arr) {
 
             var newArr = []
 
@@ -50,9 +42,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
 
             return newArr.join("");
-        };
+        },
         
-        this.setAnswer = function () {
+        setAnswer : function () {
             /* ------------------------------------------
             Return a randomly chosen string value from the answer list
             ---------------------------------------------*/
@@ -72,9 +64,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
             var randomNum = Math.floor(Math.random() * (64 - 0));
             
             this.answer =  answerList[randomNum];
-        };
+        },
 
-        this.setHex = function () {
+        setHex : function () {
             var colorMap = {
                 "Apricot": "#FDD5B1", 
                 "Asparagus": "#7BA05B",
@@ -114,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 "Peach": "#FFCBA4",
                 "Periwinkle": "#C3CDE6",
                 "Plum": "#8E3179",
-                "Purple Mountains Majesty": "#D6AEDD",
+                "Purple Mountain’s Majesty": "#D6AEDD",
                 "Raw Sienna": "#D27D46",
                 "Red": "#ED0A3F",
                 "Red Orange": "#FF681F",
@@ -134,22 +126,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 "Turquoise Blue": "#6CDAE7",
                 "Violet": "#8359A3",
                 "Violet Red": "#F7468A",
-                "White": "#FFFFFF",
+                "White": "#FFFFF",
                 "Wild Strawberry": "#FF3399",
                 "Wisteria": "#C9A0DC",
                 "Yellow": "#FBE870",
                 "Yellow Green": "#C5E17A",
-                "Yellow Orange": "#FFAE42",
+                "Yellow Orange": "#FFAE42"
             }
         
             this.hex = colorMap[this.answer];
-        };
+        },
 
-        this.setAnswerArr = function () {
+        setAnswerArr : function () {
             this.answerArr = this.answer.split("");
-        };
+        },
 
-        this.setDashArr = function () {
+        setDashArr : function () {
             /* ------------------------------------------
             Returns an array equivalent to answerArr but with letters replaced
                 with "_"
@@ -165,9 +157,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     this.dashArr[i] = "_";
                 }
             }
-        };
+        },
 
-        this.setText = function () {
+        setText : function () {
             
             document.getElementById("gameText").innerHTML = this.gameText;
             document.getElementById("colorBox").style.backgroundColor = this.hex;
@@ -177,23 +169,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("below").innerHTML = ""
                 this.first = false;
             } 
-
-            else if (this.duplicateGuess === true) {
-                document.getElementById("above").innerHTML = "You've Already Guessed This Letter";
-            }
             else if (this.winner === true) {
                 document.getElementById("above").innerHTML = "You're A Winner!!! You Really Know Your Colors!!!";
                 document.getElementById("below").innerHTML = ""
             } 
             else if (this.loser === true) {
-                document.getElementById("above").innerHTML = "Sorry you Lose!!! The Correct Answer Was " + this.answer;
+                document.getElementById("above").innerHTML = "Sorry you Lose!!!";
                 document.getElementById("below").innerHTML = ""
             }
             else if (this.goodGuess === true) {
                 document.getElementById("above").innerHTML = "<p>" + this.guess.toUpperCase() + " is a Good Guess!</p>"
-                if (this.badGuessCount > 0) {
-                    document.getElementById("below").innerHTML = "<p>Your Incorrect Guesses Are " + this.badGuessArr.toString().toUpperCase() + ".</p><p>You have " + (this.badGuessAllowed - this.badGuessCount) + " more guesses.</p>";
-                }
+                document.getElementById("below").innerHTML = "<p>Your Incorrect Guesses Are " + this.badGuessArr.toString().toUpperCase() + ".</p><p>You have " + (this.badGuessAllowed - this.badGuessCount) + " more guesses.</p>";
             } 
             else {
                 document.getElementById("above").innerHTML = "<p>Sorry there are no " + this.guess.toUpperCase() + "'s.</p>"  
@@ -201,9 +187,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
 
 
-        };
+        },
 
-        this.winCheck = function () {
+        winCheck : function () {
             
             if (this.badGuessCount === this.badGuessAllowed) {
                 this.loser = true;
@@ -216,66 +202,46 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 }
                 this.winner = true;
             }
-        };
+        },
 
-        this.turn = function () {
-            letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+        turn : function () {
+            
             this.goodGuess = false;
 
-            if (letters.includes(this.guess.toLowerCase())) {
-
-                if (this.guessList.includes(this.guess)) {
-                    this.duplicateGuess = true;
-                    this.setText();
-                    this.duplicateGuess = false;
-
-                } else {
-
-                    this.guessList.push(this.guess);
-
-                    for (i = 0; i < this.answerArr.length; i++) {
-                        if (this.answerArr[i].toLowerCase() === this.guess.toLowerCase()) {
-                            this.dashArr[i] = this.answerArr[i];
-                            this.goodGuess = true;
-                        }
-                    }
-                    
-                    if (this.goodGuess === false) {
-                        this.badGuessCount++;
-                        this.badGuessArr.push(this.guess);
-                    }
-                    
-                    this.gameText = this.prettyText(this.dashArr);
-                    this.winCheck();
-                    this.setText();
-
-                    if (this.winner === true || this.loser === true) {
-                        return true;
-                    }
+            for (i = 0; i < this.answerArr.length; i++) {
+                if (this.answerArr[i].toLowerCase() === this.guess.toLowerCase()) {
+                    this.dashArr[i] = this.answerArr[i];
+                    this.goodGuess = true;
                 }
             }
-        };
-
-        this.init();
-    };
-
-
-    var gameSession = new GamePlay();
-    
-    document.onkeyup = function(event) {
-
-        gameSession.guess = event.key;
-
-        if (gameSession.turn() === true) {
-            gamecount += 1;
-            if (gameSession.getResult() === true) {
-                wincount += 1;
+            
+            if (this.goodGuess === false) {
+                this.badGuessCount++;
+                this.badGuessArr.push(this.guess);
             }
+            
+            this.gameText = this.prettyText(this.dashArr);
+            this.winCheck();
 
-            document.getElementById("gamecounter").innerHTML = "<p>Wins: " + wincount + " Losses: " + (gamecount-wincount) + "</p>";
-            setTimeout(function () {gameSession = new GamePlay();}, 3000);
+            this.setText();
+
+            // if (this.winner === true || this.loser === true) {
+            //     setTimeout(this.init(), 3000);
+            // }
+            console.log("winner " + this.winner + " loser " + this.loser);
+            console.log(this.answerArr === this.dashArr);
+            console.log(this.answerArr);
+            console.log(this.dashArr);
         }
- 
+    
+    }
+
+
+    gamePlay.init();
+
+    document.onkeyup = function(event) {
+        gamePlay.guess = event.key;
+        gamePlay.turn();    
     }
 
 });

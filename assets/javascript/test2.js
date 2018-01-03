@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 "Peach": "#FFCBA4",
                 "Periwinkle": "#C3CDE6",
                 "Plum": "#8E3179",
-                "Purple Mountains Majesty": "#D6AEDD",
+                "Purple Mountain’s Majesty": "#D6AEDD",
                 "Raw Sienna": "#D27D46",
                 "Red": "#ED0A3F",
                 "Red Orange": "#FF681F",
@@ -134,12 +134,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 "Turquoise Blue": "#6CDAE7",
                 "Violet": "#8359A3",
                 "Violet Red": "#F7468A",
-                "White": "#FFFFFF",
+                "White": "#FFFFF",
                 "Wild Strawberry": "#FF3399",
                 "Wisteria": "#C9A0DC",
                 "Yellow": "#FBE870",
                 "Yellow Green": "#C5E17A",
-                "Yellow Orange": "#FFAE42",
+                "Yellow Orange": "#FFAE42"
             }
         
             this.hex = colorMap[this.answer];
@@ -267,6 +267,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         gameSession.guess = event.key;
 
         if (gameSession.turn() === true) {
+            console.log("When I got here gamecount was " + gamecount);
             gamecount += 1;
             if (gameSession.getResult() === true) {
                 wincount += 1;
