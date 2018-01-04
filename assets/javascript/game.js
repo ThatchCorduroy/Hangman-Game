@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         this.getResult = function () {
             return this.winner;
-        }
+        };
 
         this.prettyText = function(arr) {
 
@@ -261,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
     var gameSession = new GamePlay();
+
     
     document.onkeyup = function(event) {
 
